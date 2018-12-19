@@ -39,7 +39,7 @@ def upload(ftp_server,ftp_user,ftp_pass,path_save):
     ftp = ftplib.FTP(ftp_server)
     ftp.login(ftp_user,ftp_pass)
     ext = os.path.splitext(path_save)[1]
-    print "%s,%s" %(file,ext)
+    #print "%s,%s" %(file,ext)
     if ext in (".txt", ".htm", ".html", ".conf", ".log", ".txt"):
         ftp.storlines("STOR " + os.path.split(path_save)[1], open(path_save))
     else:
@@ -49,7 +49,7 @@ with host_list as f:
     content = f.read().splitlines()
 for host in content:
     ## path_save day la path
-    print host
+    #print host
     path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,host)
     #path_save= "/root/SCRIPT/ConfigSw_%s.conf" % (timestr)
     ## file_save la object
