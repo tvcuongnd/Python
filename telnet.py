@@ -57,4 +57,4 @@ for host in content:
     # Tao file backup
     copy_config(host,user,password,file_save)
     # Day FTP
-    #upload(ftp_server,ftp_user,ftp_pass,path_save)
+    upload(ftp_server,ftp_user,ftp_pass,path_save)
