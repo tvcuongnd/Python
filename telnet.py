@@ -39,18 +39,19 @@ def copy_config(HOST,user,password,file_save):
 ftp_server="10.2.32.220"
 ftp_user="cuongtvb"
 ftp_pass="123abc@A"
-def upload(ftp,ftp_server,ftp_user,ftp_pass,file):
+def upload(ftp,ftp_server,ftp_user,ftp_pass,path_save):
     ftp = ftplib.FTP(ftp_server)
     ftp.login(ftp_user,ftp_pass)
-    ext = os.path.splitext(file)[1]
+    ext = os.path.splitext(path_save)[1]
     print "%s,%s" %(file,ext)
     if ext in (".txt", ".htm", ".html", ".conf", ".log", ".txt"):
-        ftp.storlines("STOR " + os.path.split(file)[1], open(file))
+        ftp.storlines("STOR " + os.path.split(path_save)[1], open(path_save))
     else:
-        ftp.storbinary("STOR " + os.path.split(file)[1], open(file, "rb"), 1024)
+        ftp.storbinary("STOR " + os.path.split(path_save)[1], open(path_save, "rb"), 1024)
+    # Day FTP
+    #upload(ftp,path_save)
 
 # Tao file backup
 copy_config(HOST,user,password,file_save)
 
-# Day FTP
-upload(ftp,path_save)
+
