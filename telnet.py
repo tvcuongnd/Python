@@ -45,16 +45,16 @@ def upload(ftp_server,ftp_user,ftp_pass,path_save):
     else:
         ftp.storbinary("STOR " + os.path.split(path_save)[1], open(path_save, "rb"), 1024)
 
-
-for host in host_list:
+with host_list as f:
+    content = f.read().splitlines()
+for host in content:
     ## path_save day la path
     print host
     path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,host)
+    #path_save= "/root/SCRIPT/ConfigSw_%s.conf" % (timestr)
     ## file_save la object
-    file_save = open('%s' %path_save,'wb+')
+    file_save = open('%s' %path_save ,'wb+')
     # Tao file backup
-    copy_config(host,user,password,file_save)
+    #copy_config(host,user,password,file_save)
     # Day FTP
-    upload(ftp_server,ftp_user,ftp_pass,path_save)
-
-
+    #upload(ftp_server,ftp_user,ftp_pass,path_save)
