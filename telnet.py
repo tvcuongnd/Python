@@ -5,30 +5,23 @@ import ftplib
 import os
 import time
 
+
+host_list="/root/SCRIPT/CISCO_TELNET.list"
 timestr = time.strftime("%Y%m%d-%H%M%S")
-HOST = "172.16.1.10"
+#host = "172.16.1.10"
+
+# account telnet
 user = "toolbwss"
 password = "bkav@@)!*"
-## path_save day la path
-path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,HOST)
-## file_save la object
-file_save = open('%s' %path_save ,'wb+')
+
 
 # FTP Server and account
 ftp_server="10.2.32.220"
 ftp_user="cuongtvb"
 ftp_pass="123abc@A"
 
-# Tao file backup
-#copy_config(HOST,user,password,file_save)
-
-# Day FTP
-#ftp = ftplib.FTP("10.2.32.220")
-#ftp.login("cuongtvb", "123abc@A")
-#upload(ftp,path_save)
-
-def copy_config(HOST,user,password,file_save):
-    tn = telnetlib.Telnet(HOST)
+def copy_config(host,user,password,file_save):
+    tn = telnetlib.Telnet(host)
     tn.read_until("Username: ")
     tn.write(user + "\n")
     if password:
@@ -53,9 +46,14 @@ def upload(ftp_server,ftp_user,ftp_pass,path_save):
         ftp.storbinary("STOR " + os.path.split(path_save)[1], open(path_save, "rb"), 1024)
 
 
-# Tao file backup
-copy_config(HOST,user,password,file_save)
-# Day FTP
-upload(ftp_server,ftp_user,ftp_pass,path_save)
+for host in host_list:
+    ## path_save day la path
+    path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,host)
+    ## file_save la object
+    file_save = open('%s' %path_save ,'wb+')
+    # Tao file backup
+    copy_config(host,user,password,file_save)
+    # Day FTP
+    upload(ftp_server,ftp_user,ftp_pass,path_save)
 
 
