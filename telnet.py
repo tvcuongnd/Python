@@ -13,10 +13,12 @@ timestr = time.strftime("%Y%m%d-%H%M%S")
 #host = "172.16.1.10"
 
 # account telnet
-user = "toolbwss"
-password = "bkav@@)!*"
-
-
+#user = "toolbwss"
+#password = "bkav@@)!*"
+with mk_list as j:
+    acc = j.read().splitlines()
+    user = acc[0]
+    password = acc[1]
 # FTP Server and account
 ftp_server="10.2.32.220"
 ftp_user="cuongtvb"
