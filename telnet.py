@@ -55,6 +55,6 @@ for host in content:
     ## file_save la object
     file_save = open('%s' %path_save ,'wb+')
     # Tao file backup
-    #copy_config(host,user,password,file_save)
+    copy_config(host,user,password,file_save)
     # Day FTP
     #upload(ftp_server,ftp_user,ftp_pass,path_save)
