@@ -83,7 +83,7 @@ for ip in host_list_ssh:
         remote_conn_pre.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         #initiate SSH connection
-        remote_conn_pre.connect(ip, username=username, password=password)
+        remote_conn_pre.connect(ip, username=user, password=password)
         print '#################################################'
         print "SSH connection established to %s" % ip
 
@@ -119,7 +119,7 @@ for ip in host_list_ssh:
         file_save.write(output)
         file_save.close()
         remote_conn.send("exit\n")
-        
+
         print "SSH connection closed to %s" % ip
         print '#################################################'
 
