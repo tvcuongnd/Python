@@ -6,13 +6,18 @@ import os
 import time
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
-HOST = "10.2.1.68"
+HOST = "10.100.20.150"
 user = "toolbwss"
 password = "bkav@@)!*"
 ## path_save day la path
 path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,HOST)
 ## file_save la object
 file_save = open('%s' %path_save ,'wb+')
+
+# FTP Server and account
+ftp_server="10.2.32.220"
+ftp_user="cuongtvb"
+ftp_pass="123abc@A"
 
 # Tao file backup
 #copy_config(HOST,user,password,file_save)
@@ -36,9 +41,7 @@ def copy_config(HOST,user,password,file_save):
     file_save.write(tn.read_all())
     file_save.close() 
 
-ftp_server="10.2.32.220"
-ftp_user="cuongtvb"
-ftp_pass="123abc@A"
+
 def upload(ftp_server,ftp_user,ftp_pass,path_save):
     ftp = ftplib.FTP(ftp_server)
     ftp.login(ftp_user,ftp_pass)
