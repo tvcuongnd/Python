@@ -14,6 +14,13 @@ path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,HOST)
 ## file_save la object
 file_save = open('%s' %path_save ,'wb+')
 
+# Tao file backup
+#copy_config(HOST,user,password,file_save)
+
+# Day FTP
+#ftp = ftplib.FTP("10.2.32.220")
+#ftp.login("cuongtvb", "123abc@A")
+#upload(ftp,path_save)
 
 def copy_config(HOST,user,password,file_save):
     tn = telnetlib.Telnet(HOST)
@@ -38,6 +45,7 @@ def upload(ftp, file):
         ftp.storbinary("STOR " + os.path.split(file)[1], open(file, "rb"), 1024)
 # Tao file backup
 copy_config(HOST,user,password,file_save)
+
 # Day FTP
 ftp = ftplib.FTP("10.2.32.220")
 ftp.login("cuongtvb", "123abc@A")
