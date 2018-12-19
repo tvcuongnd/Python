@@ -7,7 +7,7 @@ import time
 import paramiko
 
 
-host_list=open("/root/SCRIPT/CISCO_TELNET.list")
+host_list_telnet=open("/root/SCRIPT/CISCO_TELNET.list")
 mk_list=open("/root/SCRIPT/mk.list")
 timestr = time.strftime("%Y%m%d-%H%M%S")
 #host = "172.16.1.10"
@@ -49,16 +49,16 @@ def upload(ftp_server,ftp_user,ftp_pass,path_save):
     else:
         ftp.storbinary("STOR " + os.path.split(path_save)[1], open(path_save, "rb"), 1024)
 
-with host_list as f:
+with host_list_telnet as f:
     content = f.read().splitlines()
-for host in content:
+for host_telnet in content:
     ## path_save day la path
     #print host
-    path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,host)
+    path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,host_telnet)
     #path_save= "/root/SCRIPT/ConfigSw_%s.conf" % (timestr)
     ## file_save la object
     file_save = open('%s' %path_save ,'wb+')
     # Tao file backup
-    copy_config(host,user,password,file_save)
+    copy_config(host_telnet,user,password,file_save)
     # Day FTP
     upload(ftp_server,ftp_user,ftp_pass,path_save)
