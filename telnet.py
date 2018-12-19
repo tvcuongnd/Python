@@ -35,7 +35,7 @@ def copy_config(HOST,user,password,file_save):
        tn.read_until("Password: ")
        tn.write(password + "\n")
     tn.write("terminal length 0\n")
-    tn.write("show running-config\n")
+    tn.write("show running-config | include 0000.0000 \n")
     tn.write("terminal length 24\n")
     tn.write("exit\n")
     file_save.write(tn.read_all())
