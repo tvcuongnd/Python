@@ -4,9 +4,11 @@ import telnetlib
 import ftplib
 import os
 import time
+import paramiko
 
 
 host_list=open("/root/SCRIPT/CISCO_TELNET.list")
+mk_list=open("/root/SCRIPT/mk.list")
 timestr = time.strftime("%Y%m%d-%H%M%S")
 #host = "172.16.1.10"
 
