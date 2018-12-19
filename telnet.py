@@ -6,7 +6,7 @@ import os
 import time
 
 
-host_list="/root/SCRIPT/CISCO_TELNET.list"
+host_list=open("/root/SCRIPT/CISCO_TELNET.list")
 timestr = time.strftime("%Y%m%d-%H%M%S")
 #host = "172.16.1.10"
 
@@ -48,9 +48,10 @@ def upload(ftp_server,ftp_user,ftp_pass,path_save):
 
 for host in host_list:
     ## path_save day la path
+    print host
     path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,host)
     ## file_save la object
-    file_save = open('%s' %path_save ,'wb+')
+    file_save = open('%s' %path_save,'wb+')
     # Tao file backup
     copy_config(host,user,password,file_save)
     # Day FTP
