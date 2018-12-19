@@ -6,7 +6,7 @@ import os
 import time
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
-HOST = "10.100.20.150"
+HOST = "172.16.1.10"
 user = "toolbwss"
 password = "bkav@@)!*"
 ## path_save day la path
