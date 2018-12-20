@@ -7,23 +7,20 @@ import time
 import paramiko
 
 
-host_list_telnet=open("/root/SCRIPT/CISCO_TELNET.list")
-host_list_ssh=open("/root/SCRIPT/CISCO_SSH.list")
-mk_list=open("/root/SCRIPT/mk.list")
+host_list_telnet=open("CISCO_TELNET.list")
+host_list_ssh=open("CISCO_SSH.list")
+mk_list=open("mk.list")
 timestr = time.strftime("%Y%m%d-%H%M%S")
-#host = "172.16.1.10"
+path_save= "log_infor/ConfigSw_%s_.conf" % (timestr)
 
-# account telnet
-#user = "toolbwss"
-#password = "bkav@@)!*"
 with mk_list as j:
     acc = j.read().splitlines()
     user = acc[0]
     password = acc[1]
 # FTP Server and account
-ftp_server="10.2.32.220"
-ftp_user="cuongtvb"
-ftp_pass="123abc@A"
+ftp_server="x.x.x.x"
+ftp_user="xrange"
+ftp_pass="x@"
 
 def copy_config_telnet(host,user,password,file_save):
     tn = telnetlib.Telnet(host)
@@ -55,14 +52,12 @@ with host_list_telnet as f:
 for host_telnet in content:
     ## path_save day la path
     #print host
-    path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,host_telnet)
     #path_save= "/root/SCRIPT/ConfigSw_%s.conf" % (timestr)
     ## file_save la object
-    file_save = open('%s' %path_save ,'wb+')
+    file_save = open('%s' %path_save ,'a')
     # Tao file backup
     copy_config_telnet(host_telnet,user,password,file_save)
-    # Day FTP
-    #upload(ftp_server,ftp_user,ftp_pass,path_save)
+
 ###############################################SSH####################################################3
 
 def disable_paging(remote_conn):
@@ -114,8 +109,7 @@ for ip in host_list_ssh:
         print
         print ip + ' config backup in place'
         print
-        path_save= "/root/SCRIPT/ConfigSw_%s_%s.conf" % (timestr,ip)
-        file_save = open('%s' %path_save ,'wb+')
+        file_save = open('%s' %path_save ,'a')
         file_save.write(output)
         file_save.close()
         remote_conn.send("exit\n")
@@ -123,4 +117,5 @@ for ip in host_list_ssh:
         print "SSH connection closed to %s" % ip
         print '#################################################'
 
-       
+# Day FTP
+upload(ftp_server,ftp_user,ftp_pass,path_save)
